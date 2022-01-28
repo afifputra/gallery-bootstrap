@@ -16,7 +16,7 @@ section {
   background-color: #9ad0ec;
 }
 
-.nav-link:focus {
+.nav-link:active {
   animation: heartBeat;
   animation-duration: 1.5s;
 }

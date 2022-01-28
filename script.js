@@ -21,16 +21,18 @@ $(".kirim").on("click", (e) => {
   }
   if (email.val() === "") {
     email.addClass("is-invalid");
-    $("#validation-email").addClass("invalid-feedback");
-    $("#validation-email").text("Harap Isi Email Anda");
+    validation_email.addClass("invalid-feedback");
+    validation_email.text("Harap Isi Email Anda");
   }
   if (pesan.val() === "") {
     pesan.addClass("is-invalid");
-    $("#validation-pesan").addClass("invalid-feedback");
-    $("#validation-pesan").text("Harap Isi Field Pesan");
+    validation_pesan.addClass("invalid-feedback");
+    validation_pesan.text("Harap Isi Field Pesan");
   }
   if (name.val() !== "" && email.val() !== "" && pesan.val() !== "") {
-    // console.log($("#contact-form").serialize());
+    $(".kirim").text("");
+    $(".kirim").prop("disabled", true);
+    $(".kirim").append(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" id="spinner"></span> Loading...`);
     $.ajax({
       type: "POST",
       url: "https://api.apispreadsheets.com/data/20684/",
@@ -40,6 +42,9 @@ $(".kirim").on("click", (e) => {
         message: pesan.val(),
       },
       success: function () {
+        $(".kirim").empty();
+        $(".kirim").prop("disabled", false);
+        $(".kirim").text("Submit");
         Swal.fire({
           icon: "success",
           title: "Sukses!",
@@ -66,6 +71,9 @@ $(".kirim").on("click", (e) => {
         }
       },
       error: function () {
+        $(".kirim").empty();
+        $(".kirim").prop("disabled", false);
+        $(".kirim").text("Submit");
         Swal.fire({
           icon: "error",
           title: "Gagal!",
@@ -77,6 +85,30 @@ $(".kirim").on("click", (e) => {
         pesan.val("");
       },
     });
+  }
+});
+
+$("#name").on("keypress", function () {
+  if ($("#name").hasClass("is-invalid") && $("#validation-name").hasClass("invalid-feedback")) {
+    $("#name").removeClass("is-invalid");
+    $("#validation-name").removeClass("invalid-feedback");
+    $("#validation-name").text("");
+  }
+});
+
+$("#email").on("keypress", function () {
+  if ($("#email").hasClass("is-invalid") && $("#validation-email").hasClass("invalid-feedback")) {
+    $("#email").removeClass("is-invalid");
+    $("#validation-email").removeClass("invalid-feedback");
+    $("#validation-email").text("");
+  }
+});
+
+$("#pesan").on("keypress", function () {
+  if ($("#pesan").hasClass("is-invalid") && $("#validation-pesan").hasClass("invalid-feedback")) {
+    $("#pesan").removeClass("is-invalid");
+    $("#validation-pesan").removeClass("invalid-feedback");
+    $("#validation-pesan").text("");
   }
 });
 
@@ -93,7 +125,6 @@ function scrollBackToTop() {
     $("#btn-back-to-top").removeClass("animate__heartBeat");
     $("#btn-back-to-top").addClass("animate__rotateOut");
     $("#btn-back-to-top").removeClass("animate__rotateIn");
-    // $("#btn-back-to-top").hide();
   }
 }
 
