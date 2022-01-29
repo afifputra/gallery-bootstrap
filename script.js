@@ -3,7 +3,6 @@ AOS.init();
 $(".nav-link").on("click", function () {
   $(".nav-link").removeClass("active");
   $(this).addClass("active");
-  $("#navbarNavDropdown").removeClass("show");
 });
 
 $(".kirim").on("click", (e) => {
