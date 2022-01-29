@@ -97,10 +97,22 @@ $("#name").on("keypress", function () {
 });
 
 $("#email").on("keypress", function () {
+  const regexEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
   if ($("#email").hasClass("is-invalid") && $("#validation-email").hasClass("invalid-feedback")) {
     $("#email").removeClass("is-invalid");
     $("#validation-email").removeClass("invalid-feedback");
     $("#validation-email").text("");
+  }
+  if (regexEmail.test($("#email").val())) {
+    $("#email").addClass("is-valid");
+    $("#validation-email").addClass("valid-feedback");
+    $("#validation-email").text("OK, Formatnya Sesuai!");
+    $(".kirim").prop("disabled", false);
+  } else {
+    $("#email").addClass("is-invalid");
+    $("#validation-email").addClass("invalid-feedback");
+    $("#validation-email").text("Format Email Tidak Sesuai!");
+    $(".kirim").prop("disabled", true);
   }
 });
 
