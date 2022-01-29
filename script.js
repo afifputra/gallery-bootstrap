@@ -3,6 +3,7 @@ AOS.init();
 $(".nav-link").on("click", function () {
   $(".nav-link").removeClass("active");
   $(this).addClass("active");
+  $("#navbarNavDropdown").removeClass("show");
 });
 
 $(".kirim").on("click", (e) => {
@@ -62,6 +63,10 @@ $(".kirim").on("click", (e) => {
         if (email.hasClass("is-invalid")) {
           email.removeClass("is-invalid");
           validation_email.removeClass("invalid-feedback");
+          validation_email.text("");
+        } else if (email.hasClass("is-valid")) {
+          email.removeClass("is-valid");
+          validation_email.removeClass("valid-feedback");
           validation_email.text("");
         }
         if (pesan.hasClass("is-invalid")) {
