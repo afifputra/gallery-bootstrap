@@ -92,7 +92,7 @@ $(".kirim").on("click", (e) => {
   }
 });
 
-$("#name").on("keypress", function () {
+$("#name").on("keydown", function () {
   if ($("#name").hasClass("is-invalid") && $("#validation-name").hasClass("invalid-feedback")) {
     $("#name").removeClass("is-invalid");
     $("#validation-name").removeClass("invalid-feedback");
@@ -100,7 +100,7 @@ $("#name").on("keypress", function () {
   }
 });
 
-$("#email").on("keypress", function () {
+$("#email").on("keydown", function () {
   const regexEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
   if ($("#email").hasClass("is-invalid") && $("#validation-email").hasClass("invalid-feedback")) {
     $("#email").removeClass("is-invalid");
@@ -120,7 +120,7 @@ $("#email").on("keypress", function () {
   }
 });
 
-$("#pesan").on("keypress", function () {
+$("#pesan").on("keydown", function () {
   if ($("#pesan").hasClass("is-invalid") && $("#validation-pesan").hasClass("invalid-feedback")) {
     $("#pesan").removeClass("is-invalid");
     $("#validation-pesan").removeClass("invalid-feedback");
